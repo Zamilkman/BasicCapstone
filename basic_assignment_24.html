@@ -1,0 +1,81 @@
+<!--Write a function that takes 2 rectangle objects as defined in the last assignment. Write a function that returns true if these rectangles overlap in space or not.-->
+
+<html>
+
+<head>
+    <script>
+        function myfunction1(){
+            // This gets the value from the textbox
+            let textBoxValue_1 = parseInt(document.getElementById("myBox_1").value)
+            let textBoxValue_2 = parseInt(document.getElementById("myBox_2").value)
+            let textBoxValue_3 = parseInt(document.getElementById("myBox_3").value)
+            let textBoxValue_4 = parseInt(document.getElementById("myBox_4").value)
+
+            let dungeon1 = {x:textBoxValue_1, y:textBoxValue_2, width:textBoxValue_3, length:textBoxValue_4};
+
+            textBoxValue_1 = parseInt(document.getElementById("myBox_5").value);
+            textBoxValue_2 = parseInt(document.getElementById("myBox_6").value)
+            textBoxValue_3 = parseInt(document.getElementById("myBox_7").value)
+            textBoxValue_4 = parseInt(document.getElementById("myBox_8").value)
+
+            let dungeon2 = {x:textBoxValue_1, y:textBoxValue_2, width:textBoxValue_3, length:textBoxValue_4};
+
+            if(determineOverlap(dungeon1,dungeon2))
+            {
+                document.getElementById("answer").innerHTML = "OVERLAP FOUND!";
+            }
+            else
+            {
+                document.getElementById("answer").innerHTML = "NO OVERLAP";
+            }
+        }
+
+        function determineOverlap(dungeon1, dungeon2){
+            if(dungeon1.x <= dungeon2.x && (dungeon1.x + dungeon1.width) >= dungeon2.x && dungeon1.y <= dungeon2.y && (dungeon1.y+dungeon1.length) >= dungeon2.y)
+            {
+                return true;
+            }
+            else if (dungeon2.x <= dungeon1.x && (dungeon2.x+dungeon2.width) >= dungeon1.x && dungeon2.y <= dungeon1.y && (dungeon2.y+dungeon2.length) >= dungeon1.y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    </script>
+</head>
+
+
+<body>
+    OBJECT #1
+    <br>
+    X <input id="myBox_1" type="text"></input>
+    <br>
+    Y <input id="myBox_2" type="text"></input>
+    <br>
+    Width <input id="myBox_3" type="text"></input>
+    <br>
+    Length <input id="myBox_4" type="text"></input>
+    <br>
+    <br>
+    OBJECT #2
+    <br>
+    X <input id="myBox_5" type="text"></input>
+    <br>
+    Y <input id="myBox_6" type="text"></input>
+    <br>
+    Width <input id="myBox_7" type="text"></input>
+    <br>
+    Length <input id="myBox_8" type="text"></input>
+    <br>
+    <br>
+    <button id="button" onclick="myfunction1()">EXECUTE</button>
+    <br>
+    <br>
+    <div id="answer"></div>
+</body>
+
+</html>

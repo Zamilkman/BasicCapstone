@@ -1,0 +1,53 @@
+<!--Make an array of arrays representing a dungeon tileset! (x is the first set of arrays, y is the second set of arrays).
+    Make it 5x5 and fill each square with its x,y value, ex: "3, 4". Remember it's 0 ordered like in all code!
+    Then, write a function to print out the dungeon in logical ordering so x goes left to right and y from top to bottom. 0,0 is in the top left corner.-->
+
+<html>
+
+<head>
+    <script>
+        function myfunction1(){
+            // This gets the value from the textbox
+            // document.getElementById("answer").innerHTML = "X: "+ dungeon.x + "<br>Y: " + dungeon.y + "<br>Width: " + dungeon.width + "<br>Length: " + dungeon.length;
+            let dungeon = [];
+
+            for(let i = 0; i<5; i++)
+            {
+                dungeon[i] = [];
+                for(let n = 0; n<5; n++)
+                {
+                    dungeon[i][n] = (i + "," + n);
+                }   
+            }
+
+            document.getElementById("answer").innerHTML = arrayToString(dungeon);
+        }
+
+        function arrayToString(array)
+        {
+            let string = "";
+            for(let i = 0; i<array.length; i++)
+            {
+                for(let n = 0; n<array[i].length; n++)
+                {
+                    string += (array[n][i] + " ");
+                }   
+                string = string.trim();
+                string += "<br>";
+            }
+            string = string.trim();
+            return string;
+        }
+
+    </script>
+</head>
+
+
+<body>
+    <button id="button" onclick="myfunction1()">EXECUTE</button>
+    <br>
+    <br>
+    <div id="answer"></div>
+</body>
+
+</html>

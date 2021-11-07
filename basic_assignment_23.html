@@ -1,0 +1,39 @@
+<!--Ask the user for 4 values. x, y, width, and height.
+    Create an object that contains all four values with keys of what the values represent, and then print that object into the output div.-->
+
+<html>
+
+<head>
+    <script>
+        function myfunction1(){
+            // This gets the value from the textbox
+            let textBoxValue_1 = document.getElementById("myBox_1").value;
+            let textBoxValue_2 = document.getElementById("myBox_2").value;
+            let textBoxValue_3 = document.getElementById("myBox_3").value;
+            let textBoxValue_4 = document.getElementById("myBox_4").value;
+
+            let dungeon = {x:textBoxValue_1, y:textBoxValue_2, width:textBoxValue_3, length:textBoxValue_4};
+
+            document.getElementById("answer").innerHTML = "X: "+ dungeon.x + "<br>Y: " + dungeon.y + "<br>Width: " + dungeon.width + "<br>Length: " + dungeon.length;
+        }
+
+    </script>
+</head>
+
+
+<body>
+    X <input id="myBox_1" type="text"></input>
+    <br>
+    Y <input id="myBox_2" type="text"></input>
+    <br>
+    Width <input id="myBox_3" type="text"></input>
+    <br>
+    Length <input id="myBox_4" type="text"></input>
+    <br>
+    <button id="button" onclick="myfunction1()">EXECUTE</button>
+    <br>
+    <br>
+    <div id="answer"></div>
+</body>
+
+</html>

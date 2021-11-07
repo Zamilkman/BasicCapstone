@@ -1,0 +1,23 @@
+<!--In a new project make a button that toggles off/on this functionality: Write "hello {i}", where i counts up each time this prints, to the console every 5 seconds-->
+
+<html>
+
+<head>
+    <script>
+        let count = 0;
+        setInterval(updateScreen, 5000);
+
+        function updateScreen() {
+            count += 1;
+            document.getElementById("answer").innerHTML = "hello " + count;
+        }
+
+    </script>
+</head>
+
+
+<body>
+    <div id="answer"></div>
+</body>
+
+</html>

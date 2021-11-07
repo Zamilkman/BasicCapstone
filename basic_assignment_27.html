@@ -1,0 +1,172 @@
+<!--Generate 5 random walls in your dungeon. They will show up as W in your text output.
+    Make sure your adventurer starts at 0,0 and make sure the 5 random walls aren't placed in the starting spot.
+    Make sure your adventurer can't walk through the walls!-->
+
+<html>
+
+<head>
+    <script>
+        let dungeon = [];
+        let player = { x: 0, y: 0, tile: null };
+
+        function initializeDungeon() {
+            for (let i = 0; i < 5; i++) {
+                dungeon[i] = [];
+                for (let n = 0; n < 5; n++) {
+                    dungeon[i][n] = "X";
+                }
+            }
+
+            player.tile = dungeon[player.x][player.y];
+            dungeon[player.x][player.y] = "O";
+            randomizeWalls(5);
+            updateScreen();
+        }
+
+        function randomizeWalls(count) {
+            let x = getRandomInt(4);
+            let y = getRandomInt(4);
+            for (let i = 0; i < count; i++) {
+                while (!validTile(x, y)) {
+                    // WARNING: This loop can go infinite if there aren't enough valid tiles to accept all walls
+                    x = getRandomInt(4);
+                    y = getRandomInt(4);
+                }
+                dungeon[x][y] = "W";
+            }
+        }
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function updateDungeon() {
+            //things
+        }
+
+        function updateScreen() {
+            document.getElementById("answer").innerHTML = arrayToString(dungeon);
+        }
+
+        function arrayToString(array) {
+            let string = "";
+            for (let i = 0; i < array.length; i++) {
+                for (let n = 0; n < array[i].length; n++) {
+                    string += (array[n][i]);
+                }
+                string += "<br>";
+            }
+            string = string.trim();
+            return string;
+        }
+
+        function validTile(x, y) {
+            if (dungeon[x] !== undefined) {
+                if (dungeon[x][y] !== undefined && dungeon[x][y] != "W" && dungeon[x][y] != "O") {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+
+        function moveUp() {
+            if (validTile(player.x, player.y - 1)) {
+                dungeon[player.x][player.y] = player.tile;
+                player.y -= 1;
+                player.tile = dungeon[player.x][player.y];
+                dungeon[player.x][player.y] = "O";
+                updateScreen();
+            }
+        }
+
+        function moveDown() {
+            if (validTile(player.x, player.y + 1)) {
+                dungeon[player.x][player.y] = player.tile;
+                player.y += 1;
+                player.tile = dungeon[player.x][player.y];
+                dungeon[player.x][player.y] = "O";
+                updateScreen();
+            }
+        }
+
+        function moveLeft() {
+            if (validTile(player.x - 1, player.y)) {
+                dungeon[player.x][player.y] = player.tile;
+                player.x -= 1;
+                player.tile = dungeon[player.x][player.y];
+                dungeon[player.x][player.y] = "O";
+                updateScreen();
+            }
+        }
+
+        function moveRight() {
+            if (validTile(player.x + 1, player.y)) {
+                dungeon[player.x][player.y] = player.tile;
+                player.x += 1;
+                player.tile = dungeon[player.x][player.y];
+                dungeon[player.x][player.y] = "O";
+                updateScreen();
+            }
+        }
+
+    </script>
+    <style>
+        .grid {
+            display: grid;
+            grid-gap: 1px;
+            grid-template-columns: repeat(3, 80px);
+        }
+
+        div>.btn {
+            padding: 10px;
+            background-color: #ccc;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        div>.space {
+            padding: 10px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+    </style>
+</head>
+
+<body onload="initializeDungeon()">
+    <div class="grid">
+        <div class="space"></div>
+        <div class="btn noselect" onclick="moveUp()">UP</div>
+        <div class="space"></div>
+        <div class="btn noselect" onclick="moveLeft()">LEFT</div>
+        <div class="space"></div>
+        <div class="btn noselect" onclick="moveRight()">RIGHT</div>
+        <div class="space"></div>
+        <div class="btn noselect" onclick="moveDown()">DOWN</div>
+        <div class="space"></div>
+    </div>
+    <br>
+    <br>
+    <div id="answer"></div>
+</body>
+
+</html>
